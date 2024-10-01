@@ -55,6 +55,7 @@ int convertModelType(ModelName name) {
     case ModelName::relxillCO: return MOD_TYPE_RELXILLCO;
     case ModelName::relxilllpAlpha: return MOD_TYPE_RELXILLLPALPHA;
     case ModelName::relxillBB: return MOD_TYPE_RELXILLBBRET;
+    case ModelName::relxill_jedsad: return MOD_TYPE_RELXILL_JEDSAD;
   }
   puts(" *** relxill-error: unknown ModelName, converting model name to integer failed ");
   exit(EXIT_FAILURE);

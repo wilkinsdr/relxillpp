@@ -25,6 +25,7 @@ set(SOURCE_FILES
         xspec_wrapper_lmodels.cpp xspec_wrapper_lmodels.h   #are created by the wrapper script
         Xillspec.cpp Xillspec.h
         PrimarySource.cpp PrimarySource.h
+        JedSad.cpp JedSad.h
         )
 ############################################
 

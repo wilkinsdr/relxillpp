@@ -57,13 +57,30 @@ void LocalModel::relxill_model(const XspecSpectrum &spectrum) {
 
 
   int status = EXIT_SUCCESS;
-  if (m_model_params.irradiation() == T_Irrad::Const){
+  if (m_model_params.irradiation() == T_Irrad::Const) {
     relParam *rel_param = LocalModel::get_rel_params();
     xillParam *xill_param = LocalModel::get_xill_params();
     relxill_bb_kernel(spectrum.energy, spectrum.flux, spectrum.num_flux_bins(), xill_param, rel_param, &status);
     delete rel_param;
     delete xill_param;
+
   } else {
+
+    if (LocalModel::m_model_params.get_model_name() == ModelName::relxill_jedsad) {
+
+      double jedsad_gamma = -1 ;
+      double jedsad_ecut = -1;
+
+      // convert jedsad parameters to Gamma/Ecut before calling model with given Gamma/Ecut
+     // (jedsad_gamma, jedsad_ecut) = get_primaryspec_from_jedsad(m_model_params);
+
+      m_model_params.set_par(XPar::gamma, jedsad_gamma);
+      m_model_params.set_par(XPar::ecut, jedsad_ecut);
+
+      printf(" *** RELXILL JEDSAD not yet implemented \n");
+      throw std::exception();
+
+    }
     relxill_kernel(spectrum, m_model_params, &status);
   }
 

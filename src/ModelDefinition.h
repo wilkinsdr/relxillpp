@@ -64,7 +64,14 @@ enum class XPar {
   shifttmaxrrad,  // only for testing relxillBB
   luminosity_source_1e38,
   distance,
-  mass
+  mass,
+  rj,        // parameter of jedsad
+  mdot,   // parameter of jedsad
+  omega,   // parameter of jedsad
+  mu,   // parameter of jedsad
+  ms,   // parameter of jedsad
+  b,   // parameter of jedsad
+  p   // parameter of jedsad
 };
 
 enum class AuxPar{
