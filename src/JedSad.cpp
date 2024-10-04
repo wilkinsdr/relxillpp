@@ -36,8 +36,8 @@ void JedsadTable::read_jstable_params(fitsfile* fptr){
   CHECK_STATUS_CFITSIO(status)
 
   // we know the column numbers
-  int colnum_n = 9;
-  int colnum_vals = 10;
+  int colnum_n = 2;
+  int colnum_vals = 3;
 
   long n;
   fits_get_num_rows(fptr, &n, &status);
@@ -71,6 +71,10 @@ void JedsadTable::read_jstable_params(fitsfile* fptr){
     n_data_entries *= num_param_vals[ii];
   }
 
+  // read the data
+  string extname_data = "DATA";
+  fits_movenam_hdu_cpp(fptr, BINARY_TBL, extname_data.c_str(), extver, &status);
+  CHECK_STATUS_CFITSIO(status)
 
   int n_columns_data;
   fits_get_num_cols(fptr, &n_columns_data, &status);
@@ -83,7 +87,7 @@ void JedsadTable::read_jstable_params(fitsfile* fptr){
   assert(n_rows_data == n_data_entries);
 
   for(ii = 0; ii< n_columns_data; ii++) {
-    param_vals[ii] = new double[n_rows_data];
+    data[ii] = new double[n_rows_data];
     fits_read_col(fptr, TDOUBLE, ii+1, 1, 1, n_rows_data, &nullval, data[ii], &anynul, &status);
   }
 

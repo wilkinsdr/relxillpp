@@ -111,7 +111,7 @@ class JedsadTable{
 
  public:
   JedsadTable(){
-    m_fullfilename = get_relxill_table_path() + JedsadTableInformation::instance().get_filename();  // the standard filename
+    m_fullfilename = JedsadTableInformation::instance().get_filename();  // the standard filename
     read_table();
   };
 
@@ -123,7 +123,7 @@ class JedsadTable{
   void read_table();
   void interpolate(const double* param_array);
 
-  int* num_param_vals;
+  int *num_param_vals = new int[num_params()];
   std::vector<double*> param_vals;
   std::vector<double*> data;
 
