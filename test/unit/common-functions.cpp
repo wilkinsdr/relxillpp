@@ -23,9 +23,6 @@ double sum_flux(const double *flux, int nbins) {
   double sum = 0.0;
   for (int ii = 0; ii < nbins; ii++) {
     sum += flux[ii];
-    if (flux[ii] > 1e-6) {
-      printf("asdas\n");
-    }
   }
   return sum;
 }
