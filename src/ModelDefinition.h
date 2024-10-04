@@ -124,11 +124,11 @@ class ParamList {
  public:
 
   explicit ParamList( std::vector<XPar> parnames, std::vector<double> parvalues) :
-      m_parnames{std::move(parnames)}
+      m_parnames_xspec{std::move(parnames)}
   {
 
-    for (size_t ii = 0; ii < m_parnames.size() ; ++ii){
-      m_param.insert(std::make_pair(m_parnames[ii],parvalues[ii]));
+    for (size_t ii = 0; ii < m_parnames_xspec.size(); ++ii) {
+      m_param.insert(std::make_pair(m_parnames_xspec[ii], parvalues[ii]));
     }
   }
 
@@ -161,7 +161,7 @@ class ParamList {
   }
 
   auto num_params(){
-    return m_parnames.size();
+    return m_parnames_xspec.size();
   }
 
   bool does_parameter_exist(const XPar &name) const {
@@ -173,12 +173,12 @@ class ParamList {
   }
 
   auto get_parnames(){
-    return m_parnames;
+    return m_parnames_xspec;
   }
 
 
  private:
-  std::vector<XPar> m_parnames = {};  // need this as this needs to be in order given by Xspec TODO: could be fixed in xspec_wrapper
+  std::vector<XPar> m_parnames_xspec = {};  // need this as this needs to be in order given by Xspec TODO: could be fixed in xspec_wrapper
  protected:
   std::unordered_map<XPar, double> m_param = {};
 };

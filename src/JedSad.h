@@ -112,7 +112,8 @@ class JedsadTable{
  public:
   JedsadTable(){
     m_fullfilename = JedsadTableInformation::instance().get_filename();  // the standard filename
-    read_table();
+    num_param_vals = new int[num_params()];
+    //   read_table();
   };
 
   size_t num_params() {
@@ -127,7 +128,7 @@ class JedsadTable{
   void read_table();
   void interpolate(const double* param_array);
 
-  int *num_param_vals = new int[num_params()];
+  int *num_param_vals;
   std::vector<double*> param_vals;
   std::vector<double*> data;
 
@@ -135,6 +136,15 @@ class JedsadTable{
     // check env variable (TBD)
     // if different, update it
   }
+
+  ~JedsadTable() {
+    for (auto entry: param_vals)
+      delete[] entry;
+    for (auto entry: data)
+      delete[] entry;
+    delete[] num_param_vals;
+  }
+
 
  private:
   string m_fullfilename;

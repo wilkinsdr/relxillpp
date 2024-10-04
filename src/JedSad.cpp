@@ -98,6 +98,10 @@ void JedsadTable::read_jstable_params(fitsfile* fptr){
 
 void JedsadTable::read_table() {
 
+  if (!data.empty()) {
+    printf(" data not empty, skipping reading the table\n");
+    return;
+  }
 
   // init sizes
   param_vals.resize(num_params());
@@ -105,10 +109,13 @@ void JedsadTable::read_table() {
 
   int status = EXIT_SUCCESS;
   fitsfile *fptr = open_fits_table_stdpath(m_fullfilename.c_str(), &status);
-  CHECK_STATUS_CFITSIO(status);
+  CHECK_STATUS_CFITSIO(status)
 
   assert(fptr != nullptr);
   read_jstable_params(fptr);
+
+  fits_close_file(fptr, &status);
+  CHECK_STATUS_CFITSIO(status)
 
 }
 
@@ -126,7 +133,7 @@ PrimespecParams convert_jedsad_to_primaryspec_params(const ModelDefinition& mode
 
   double* param_array = jedsadParams.get_param_array();
   JedsadTable::instance().interpolate(param_array);
-  free(param_array);
+  delete[](param_array);
 
 
 
