@@ -173,4 +173,6 @@ int shouldAuxInfoGetPrinted(void);
 
 void print_version_number(void);
 
+void fits_movenam_hdu_cpp(fitsfile* fptr, int type, const char* extname, int extver, int* status);
+
 #endif /* RELUTILITY_H_ */

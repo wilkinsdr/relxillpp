@@ -811,3 +811,7 @@ void invertArray(double *vals, int n) {
 }
 
 
+void fits_movenam_hdu_cpp(fitsfile* fptr, int type, const char* extname, int extver, int* status){
+  fits_movnam_hdu(fptr, type, (char*) extname, extver, status);
+}
+

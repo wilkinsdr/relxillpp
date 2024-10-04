@@ -18,5 +18,118 @@
 
 #include "JedSad.h"
 
+extern "C" {
+#include "xilltable.h"
+#include "relutility.h"
+}
+
+#define CHECK_STATUS_CFITSIO(status) \
+ if (EXIT_SUCCESS!=status) {printf(" error in cfitsio function with code %i\n",status); throw std::exception();}
+
+
+void JedsadTable::read_jstable_params(fitsfile* fptr){
+
+  int extver = 0;
+  string extname = "PARAMETERS";
+  int status = EXIT_SUCCESS;
+  fits_movenam_hdu_cpp(fptr, BINARY_TBL, extname.c_str(), extver, &status);
+  CHECK_STATUS_CFITSIO(status)
+
+  // we know the column numbers
+  int colnum_n = 9;
+  int colnum_vals = 10;
+
+  long n;
+  fits_get_num_rows(fptr, &n, &status);
+  CHECK_STATUS_CFITSIO(status)
+
+  if (num_params() != n) {
+    printf("wrong format of the JEDSAD table (not the correct number of parameters)");
+    throw std::exception();
+  }
+
+  int anynul = 0;
+  double nullval = 0.0;
+
+  int ii;
+  char strnull[10];
+  strcpy(strnull, " ");
+
+  fits_read_col(fptr, TINT, colnum_n, 1, 1, n, &nullval, num_param_vals, &anynul, &status);
+  CHECK_STATUS_CFITSIO(status)
+
+  assert(param_vals.size() == n);
+  for (ii = 0; ii < n; ii++) {
+    /** the we load the parameter values **/
+    param_vals[ii] = new double[num_param_vals[ii]];
+    fits_read_col(fptr, TDOUBLE, colnum_vals, ii + 1, 1, num_param_vals[ii], &nullval, param_vals[ii], &anynul,&status);
+    CHECK_STATUS_CFITSIO(status)
+  }
+
+  int n_data_entries = 1;
+  for (ii = 0; ii < n; ii++){
+    n_data_entries *= num_param_vals[ii];
+  }
+
+
+  int n_columns_data;
+  fits_get_num_cols(fptr, &n_columns_data, &status);
+  CHECK_STATUS_CFITSIO(status)
+  assert(n_columns_data == data.size());
+
+  long n_rows_data;
+  fits_get_num_rows(fptr, &n_rows_data, &status);
+  CHECK_STATUS_CFITSIO(status)
+  assert(n_rows_data == n_data_entries);
+
+  for(ii = 0; ii< n_columns_data; ii++) {
+    param_vals[ii] = new double[n_rows_data];
+    fits_read_col(fptr, TDOUBLE, ii+1, 1, 1, n_rows_data, &nullval, data[ii], &anynul, &status);
+  }
+
+}
+
+
+
+void JedsadTable::read_table() {
+
+
+  // init sizes
+  param_vals.resize(num_params());
+  data.resize(JedsadTableInformation::instance().n_data);
+
+  int status = EXIT_SUCCESS;
+  fitsfile *fptr = open_fits_table_stdpath(m_fullfilename.c_str(), &status);
+  CHECK_STATUS_CFITSIO(status);
+
+  assert(fptr != nullptr);
+  read_jstable_params(fptr);
+
+}
+// create only one instance of the table
+JedsadTable * const JedsadTable::instance = new JedsadTable();
+
+void JedsadTable::interpolate(const double *param_array) {
+
+  if (data.empty()) {
+    read_table();
+  }
+
+}
+
+PrimespecParams convert_jedsad_to_primaryspec_params(const ModelDefinition& model_definition){
+
+  auto jedsadParams = JedsadParams(model_definition);
+
+  double* param_array = jedsadParams.get_param_array();
+  JedsadTable::instance->interpolate(param_array);
+  free(param_array);
+
+
+
+  return PrimespecParams(-1.0, -1.0);
+}
+
+
  // jedsadTable *cached_jedsad_table = nullptr;
 
