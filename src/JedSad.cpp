@@ -27,6 +27,7 @@ extern "C" {
  if (EXIT_SUCCESS!=status) {printf(" error in cfitsio function with code %i\n",status); throw std::exception();}
 
 
+
 void JedsadTable::read_jstable_params(fitsfile* fptr){
 
   int extver = 0;
@@ -110,8 +111,6 @@ void JedsadTable::read_table() {
   read_jstable_params(fptr);
 
 }
-// create only one instance of the table
-JedsadTable * const JedsadTable::instance = new JedsadTable();
 
 void JedsadTable::interpolate(const double *param_array) {
 
@@ -126,7 +125,7 @@ PrimespecParams convert_jedsad_to_primaryspec_params(const ModelDefinition& mode
   auto jedsadParams = JedsadParams(model_definition);
 
   double* param_array = jedsadParams.get_param_array();
-  JedsadTable::instance->interpolate(param_array);
+  JedsadTable::instance().interpolate(param_array);
   free(param_array);
 
 

@@ -148,6 +148,9 @@ class ParamList {
     }
   }
 
+  void insert_par(XPar name, double value) {
+    m_param.insert(std::make_pair(name, value));
+  }
 
   auto &operator[](const XPar &name) const {
     try {

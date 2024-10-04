@@ -48,8 +48,8 @@ class JedsadTableInformation{
  * needing to initialize it anywhere else
  */
   static JedsadTableInformation &instance() {
-    static auto *instance = new JedsadTableInformation();
-    return *instance;
+    static JedsadTableInformation inst;
+    return inst;
   }
 
   // this is the order and name of the parameters in the table
@@ -119,7 +119,11 @@ class JedsadTable{
     return param_names_table.size();
   };
 
-  static JedsadTable * const instance;
+  // Singleton Pattern
+  static JedsadTable &instance() {
+    static JedsadTable inst;
+    return inst;
+  }
   void read_table();
   void interpolate(const double* param_array);
 
