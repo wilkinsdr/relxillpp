@@ -86,6 +86,7 @@ void JedsadTable::read_jstable_params(fitsfile* fptr){
   fits_get_num_rows(fptr, &n_rows_data, &status);
   CHECK_STATUS_CFITSIO(status)
   assert(n_rows_data == n_data_entries);
+  m_num_data_vals = n_data_entries;
 
   for(ii = 0; ii< n_columns_data; ii++) {
     data[ii] = new double[n_rows_data];
@@ -122,8 +123,10 @@ void JedsadTable::read_table() {
 void JedsadTable::interpolate(const double *param_array) {
 
   if (data.empty()) {
-    read_table();
+  //  read_table();
   }
+
+
 
 }
 

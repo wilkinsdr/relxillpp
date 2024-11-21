@@ -77,12 +77,13 @@ void LocalModel::relxill_model(const XspecSpectrum &spectrum) {
       if (primespec_params.gamma < 1e-8 || primespec_params.ecut < 1e-8) {
         printf(" *** warning: jedsad parameters are 0, no reflection calculated\n");
         setArrayToZero(spectrum.flux, spectrum.num_flux_bins());
+        return;
       }
 
       printf(" *** RELXILL JEDSAD not yet implemented; DOING NOTHING \n");
-      //   throw std::exception();
     }
-    // relxill_kernel(spectrum, m_model_params, &status);
+
+    relxill_kernel(spectrum, m_model_params, &status);
   }
 
   if (status != EXIT_SUCCESS) {

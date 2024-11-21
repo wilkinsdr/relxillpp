@@ -21,6 +21,7 @@
 #include "xspec_wrapper_lmodels.h"
 #include "XspecSpectrum.h"
 #include "common-functions.h"
+#include "JedSad.h"
 
 
 TEST_CASE(" Execute relxill jedsad", "[jedsad]") {
@@ -36,3 +37,18 @@ TEST_CASE(" Execute relxill jedsad", "[jedsad]") {
 
 }
 
+TEST_CASE(" Read table", "[jedsad]"){
+
+  auto tab = &JedsadTable::instance();
+
+ // if (tab.data.empty())
+ //   tab.read_table();
+
+  // check the table dimensions
+  int nvals = tab->num_data_vals();
+  printf(" %e \n",calcSum(tab->data[0],nvals)/nvals);
+  printf(" %e \n",calcSum(tab->data[1],nvals)/nvals);
+
+  //REQUIRE(calcSum(tab.data[0],tab.num_data_vals()));
+
+}

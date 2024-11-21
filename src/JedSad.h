@@ -110,20 +110,15 @@ class JedsadParams{
 class JedsadTable{
 
  public:
-  JedsadTable(){
-    m_fullfilename = JedsadTableInformation::instance().get_filename();  // the standard filename
-    num_param_vals = new int[num_params()];
-    //   read_table();
-  };
 
   size_t num_params() {
     return param_names_table.size();
   };
 
   // Singleton Pattern
-  static JedsadTable &instance() {
-    static JedsadTable inst;
-    return inst;
+  static JedsadTable &instance(){
+    static JedsadTable tab;
+    return tab;
   }
   void read_table();
   void interpolate(const double* param_array);
@@ -138,18 +133,33 @@ class JedsadTable{
   }
 
   ~JedsadTable() {
-    for (auto entry: param_vals)
-      delete[] entry;
-    for (auto entry: data)
-      delete[] entry;
+    for (auto entry1: param_vals) {
+      delete[] entry1;
+    }
+    std::destroy(param_vals.begin(), param_vals.end());
+
+    for (auto entry2: data)
+      delete[] entry2;
     delete[] num_param_vals;
   }
 
+  [[nodiscard]] int num_data_vals() const{
+    return m_num_data_vals;
+  }
 
  private:
   string m_fullfilename;
   const std::vector<JSPar> param_names_table = JedsadTableInformation::instance().param_names_table;
   void read_jstable_params(fitsfile *fptr);
+  int m_num_data_vals = 0;
+
+  JedsadTable(){
+    m_fullfilename = JedsadTableInformation::instance().get_filename();  // the standard filename
+    num_param_vals = new int[num_params()];
+    read_table();
+  };
+  JedsadTable( const JedsadTable& );
+
 } ;
 
 
