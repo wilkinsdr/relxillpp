@@ -100,7 +100,8 @@ void JedsadTable::read_jstable_params(fitsfile* fptr){
 // from the index for each of the parameters, calculate the index of the data
 int JedsadTable::get_data_index(std::vector<int> pind) {
 
-  assert (num_params() != 9);
+
+  assert (num_params() == 9);
 
   return (((((((pind[0]
                 * num_param_vals[1] + pind[1])
@@ -172,10 +173,23 @@ std::vector<double> JedsadTable::interpolate(const double *param_array) {
       upper_indices[dim] = n_grid_points - 1;
       weights[dim] = 1.0;
     } else if (found_index >= 0) {
-      // Exact match found
-      lower_indices[dim] = found_index;
-      upper_indices[dim] = found_index;
-      weights[dim] = 1.0;
+      // Check if it's truly an exact match
+      if (param_grid[found_index] == query_val) {
+        // Exact match found
+        lower_indices[dim] = found_index;
+        upper_indices[dim] = found_index;
+        weights[dim] = 1.0;
+      } else {
+        // Not an exact match, interpolate between found_index and found_index+1
+        lower_indices[dim] = found_index;
+        upper_indices[dim] = found_index + 1;
+
+        // Calculate interpolation weight
+        double lower_val = param_grid[lower_indices[dim]];
+        double upper_val = param_grid[upper_indices[dim]];
+        weights[dim] = (query_val - lower_val) / (upper_val - lower_val);
+
+      }
     } else {
       // Not found: binary_search returns -(insertion_point + 1)
       // insertion_point is where the value would be inserted
