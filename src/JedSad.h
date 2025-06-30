@@ -39,6 +39,7 @@ enum JSPar{
   p
 };
 
+const int num_params_jedsad_table = 9;
 
 class JedsadTableInformation{
 
@@ -70,7 +71,6 @@ class JedsadTableInformation{
   }
 
   const int n_data = 2;
-  const int n_params = 9;
 
  private:
   const string m_filename = "Refl_XrB_DauserTest_lb3.fits";  // TODO: make it readable by env variable
@@ -121,11 +121,15 @@ class JedsadTable{
     return tab;
   }
   void read_table();
-  void interpolate(const double* param_array);
+
+  std::vector<double> interpolate(const double *param_array);
+
+  int get_data_index(std::vector<int> pind);
+
 
   int *num_param_vals;
   std::vector<double*> param_vals;
-  std::vector<double*> data;
+  std::vector<double *> raw_data;
 
   void update_filename(){
     // check env variable (TBD)
@@ -138,7 +142,7 @@ class JedsadTable{
     }
     std::destroy(param_vals.begin(), param_vals.end());
 
-    for (auto entry2: data)
+    for (auto entry2: raw_data)
       delete[] entry2;
     delete[] num_param_vals;
   }
@@ -155,7 +159,9 @@ class JedsadTable{
 
   JedsadTable(){
     m_fullfilename = JedsadTableInformation::instance().get_filename();  // the standard filename
-    num_param_vals = new int[num_params()];
+    const int _num_params = num_params();
+    assert(_num_params == num_params_jedsad_table);
+    num_param_vals = new int[_num_params];
     read_table();
   };
   JedsadTable( const JedsadTable& );

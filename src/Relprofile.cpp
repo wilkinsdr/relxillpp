@@ -927,12 +927,7 @@ void calc_relline_profile(relline_spec_multizone *spec, RelSysPar *sysPar, int *
                      da->re, g, da->gstar[jj], da->trff[jj][kk], weight);
               *status = EXIT_FAILURE;
             }
-
-            spec->rel_cosne->dist[izone][imu] +=
-                da->re * pow(2 * M_PI * g * da->re, 2) /
-                    sqrt(da->gstar[jj] - da->gstar[jj] * da->gstar[jj]) *
-                    da->trff[jj][kk] * da->emis
-                    * weight * sysPar->d_gstar[jj];
+            spec->rel_cosne->dist[izone][imu] += tmp;
           }
         }
       } /** end calculating angular distribution **/

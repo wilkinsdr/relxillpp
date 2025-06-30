@@ -46,8 +46,8 @@ TEST_CASE(" Read table", "[jedsad]"){
 
   // check the table dimensions
   int nvals = tab->num_data_vals();
-  printf(" %e \n",calcSum(tab->data[0],nvals)/nvals);
-  printf(" %e \n",calcSum(tab->data[1],nvals)/nvals);
+  printf(" %e \n", calcSum(tab->raw_data[0], nvals) / nvals);
+  printf(" %e \n", calcSum(tab->raw_data[1], nvals) / nvals);
 
   //REQUIRE(calcSum(tab.data[0],tab.num_data_vals()));
 
