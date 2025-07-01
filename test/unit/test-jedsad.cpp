@@ -24,15 +24,17 @@
 #include "JedSad.h"
 
 
-TEST_CASE(" Execute relxill jedsad", "[jedsad]") {
+TEST_CASE(" Execute relxill jedsad", "[jedsad-exec]") {
   DefaultSpec default_spec{};
 
   LocalModel lmod(ModelName::relxill_jedsad);
 
   auto spec = default_spec.get_xspec_spectrum();
+  lmod.eval_model(spec);
   REQUIRE_NOTHROW(lmod.eval_model(spec));
 
   double sum = sum_flux(spec.flux, spec.num_flux_bins());
+  REQUIRE(sum > 1E-8);
 // not yet working, model not implemented  REQUIRE(sum > 1e-8);
 
 }
@@ -66,7 +68,7 @@ TEST_CASE(" Read table", "[jedsad]"){
 
 }
 
-TEST_CASE(" Parameter Values in the table", "[jedsad-interpol]") {
+TEST_CASE(" Parameter Values in the table", "[jedsad]") {
 
   auto tab = &JedsadTable::instance();
 

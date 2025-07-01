@@ -105,6 +105,14 @@ class JedsadParams{
   std::unordered_map<JSPar, double> jedsad_params;
 };
 
+class PrimespecParams { ;
+
+ public:
+  PrimespecParams(double _gamma, double _ecut) : gamma{_gamma}, ecut{_ecut} {};
+
+  double ecut;
+  double gamma;
+};
 
 
 class JedsadTable{
@@ -169,14 +177,6 @@ class JedsadTable{
 } ;
 
 
-class PrimespecParams{ ;
-
- public:
-  PrimespecParams(double _gamma, double _ecut) : gamma{_gamma}, ecut{_ecut} { };
-
-  double ecut;
-  double gamma;
-};
 
 
 PrimespecParams convert_jedsad_to_primaryspec_params(const ModelDefinition& model_definition);

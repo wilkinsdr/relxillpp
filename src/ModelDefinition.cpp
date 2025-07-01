@@ -298,7 +298,6 @@ relParam *get_rel_params(const ModelDefinition &inp_param) {
     throw ParamInputException("get_rel_params: model evaluation failed due to missing relativistic parameters");
   }
 
-  // those values should never be used, unless it is set by the model
   param->emis1 = inp_param.get_otherwise_default(XPar::index1, 0);
   param->emis2 = inp_param.get_otherwise_default(XPar::index2, 0);
   param->rbr = inp_param.get_otherwise_default(XPar::rbr, 0);

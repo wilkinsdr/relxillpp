@@ -69,8 +69,10 @@ void LocalModel::relxill_model(const XspecSpectrum &spectrum) {
 
     if (LocalModel::m_model_params.get_model_name() == ModelName::relxill_jedsad) {
 
-      // convert jedsad parameters to Gamma/Ecut before calling model with given Gamma/Ecut
+      // convert jedsad parameters to Gamma/Ecut
       auto primespec_params = convert_jedsad_to_primaryspec_params(m_model_params);
+
+      // add these parameters to the input list
       m_model_params.insert_par(XPar::gamma, primespec_params.gamma);
       m_model_params.insert_par(XPar::ecut, primespec_params.ecut);
 
@@ -80,7 +82,6 @@ void LocalModel::relxill_model(const XspecSpectrum &spectrum) {
         return;
       }
 
-      printf(" *** RELXILL JEDSAD not yet implemented; DOING NOTHING \n");
     }
 
     relxill_kernel(spectrum, m_model_params, &status);

@@ -252,12 +252,11 @@ PrimespecParams convert_jedsad_to_primaryspec_params(const ModelDefinition& mode
   auto jedsadParams = JedsadParams(model_definition);
 
   double* param_array = jedsadParams.get_param_array();
-  JedsadTable::instance().interpolate(param_array);
+  auto result = JedsadTable::instance().interpolate(param_array);
   delete[](param_array);
 
 
-
-  return PrimespecParams(-1.0, -1.0);
+  return PrimespecParams(result[0], result[1]);
 }
 
 
