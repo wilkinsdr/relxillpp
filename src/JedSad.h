@@ -148,7 +148,6 @@ class JedsadTable{
     for (auto entry1: param_vals) {
       delete[] entry1;
     }
-    std::destroy(param_vals.begin(), param_vals.end());
 
     for (auto entry2: raw_data)
       delete[] entry2;
