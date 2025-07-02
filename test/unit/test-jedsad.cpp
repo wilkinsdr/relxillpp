@@ -24,7 +24,7 @@
 #include "JedSad.h"
 
 
-TEST_CASE(" Execute relxill jedsad", "[jedsad-exec]") {
+TEST_CASE(" Execute relxill jedsad", "[jedsad]") {
   DefaultSpec default_spec{};
 
   LocalModel lmod(ModelName::relxill_jedsad);

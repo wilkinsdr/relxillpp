@@ -175,4 +175,6 @@ void print_version_number(void);
 
 void fits_movenam_hdu_cpp(fitsfile* fptr, int type, const char* extname, int extver, int* status);
 
+double convert_to_isco(double rin_relxill, double a);
+
 #endif /* RELUTILITY_H_ */

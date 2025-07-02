@@ -38,8 +38,8 @@ int main(int argc, char *argv[]) {
 
     if (argc == 2) {
       static_assert(num_evaluations > 1);
-      eval_model_relat_param_changes(model_name, num_evaluations/2);
-      eval_model_xillver_param_changes(model_name, num_evaluations/2);
+      eval_model_relat_param_changes(model_name, num_evaluations / 2);
+      eval_model_xillver_param_changes(model_name, num_evaluations / 2);
     } else {
 
       if (std::string(argv[2]) == "rel") {
@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
 
 
     auto time_elapsed_msec = std::chrono::duration_cast<std::chrono::milliseconds>
-        (std::chrono::steady_clock::now() - tstart ).count();
+        (std::chrono::steady_clock::now() - tstart).count();
 
     printf("Time elapsed:              %.2fsec\n", static_cast<double>(time_elapsed_msec) * 0.001);
     printf("Time per model evaluation: %.0fmsec ", static_cast<double>(time_elapsed_msec) / num_evaluations);

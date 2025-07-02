@@ -1,4 +1,4 @@
-set(EXEC_FILES speed_test)
+set(EXEC_FILES speed_test speed_test_jedsad)
 
 foreach (execfile ${EXEC_FILES})
     add_executable(${execfile} ${execfile}.cpp

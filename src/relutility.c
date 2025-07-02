@@ -817,3 +817,9 @@ void fits_movenam_hdu_cpp(fitsfile* fptr, int type, const char* extname, int ext
   fits_movnam_hdu(fptr, type, (char*) extname, extver, status);
 }
 
+double convert_to_isco(double rin_relxill, double a) {
+
+
+  return 0;
+}
+

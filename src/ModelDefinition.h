@@ -236,5 +236,6 @@ xillParam *get_xill_params(const ModelDefinition &inp_param);
 
 int is_env_set(const char* envname, int default_value);
 
+double radiusToRisco(double rin_relxill, double a);
 
 #endif //RELXILL_SRC_MODELDEFINITION_H_

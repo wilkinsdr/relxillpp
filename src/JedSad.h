@@ -85,7 +85,8 @@ class JedsadParams{
     jedsad_params[JSPar::mass] = _model_params[XPar::mass];
     jedsad_params[JSPar::rj] = _model_params[XPar::rj];
     jedsad_params[JSPar::mdot] = _model_params[XPar::mdot];
-    jedsad_params[JSPar::risco] = _model_params[XPar::rin]; // need to make sure it is converted to the correct unit
+    jedsad_params[JSPar::risco] = radiusToRisco(_model_params[XPar::rin],
+                                                _model_params[XPar::a]); // need to make sure it is converted to the correct unit
     jedsad_params[JSPar::omega] = _model_params[XPar::omega];
     jedsad_params[JSPar::mu] = _model_params[XPar::mu];
     jedsad_params[JSPar::ms] = _model_params[XPar::ms];
