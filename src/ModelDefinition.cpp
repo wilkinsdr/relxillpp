@@ -163,14 +163,6 @@ static void setNegativeHeightToRplus(double *h, double a) {
   }
 }
 
-double radiusToRisco(double rin_relxill, double a) {
-  if (rin_relxill < 0) {
-    return fabs(rin_relxill);
-  } else {
-    return rin_relxill / kerr_rms(a);
-  }
-}
-
 int warned_rms = 0;
 int warned_height = 0;
 
