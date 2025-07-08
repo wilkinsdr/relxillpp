@@ -110,8 +110,8 @@ class PrimespecParams { ;
  public:
   PrimespecParams(double _gamma, double _ecut) : gamma{_gamma}, ecut{_ecut} {};
 
-  double ecut;
   double gamma;
+  double ecut;
 };
 
 
