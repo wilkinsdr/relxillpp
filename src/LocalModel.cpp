@@ -80,7 +80,7 @@ void LocalModel::relxill_model(const XspecSpectrum &spectrum) {
         printf(" *** warning: jedsad parameters are 0, no reflection calculated\n");
         setArrayToZero(spectrum.flux, spectrum.num_flux_bins());
         return;
-      } else {
+      } else if (is_debug_run()) {
         printf(" *** debug: jedsad parameters: gamma=%f, ecut=%f\n", primespec_params.gamma, primespec_params.ecut);
       }
 
