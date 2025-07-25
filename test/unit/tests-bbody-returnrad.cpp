@@ -287,7 +287,7 @@ void writeZoneXillverAllIncidentReturnSpec(double Tshift, int indZone, int n_ene
   // -3- primary radiation causing the reflection
   sprintf(fnameSingleBuffer,fname_zone, "reflectPrim");
 
-  double* xillver_prim_out = scaledXillverPrimaryBBodyHighener(xill_param->kTbb, returnSpec->specRet[indZone],
+  double* xillver_prim_out = getXillverPimaryBBodyNormalizedAtHighener(xill_param->kTbb, returnSpec->specRet[indZone],
                                                                returnSpec->ener, returnSpec->n_ener, status);
   fits_write_spec(fnameSingleBuffer,ener, xillver_prim_out, n_ener, status);
   fitsAddKeyRadialZone(fnameSingleBuffer, returnSpec, indZone, status);
