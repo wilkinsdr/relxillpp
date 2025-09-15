@@ -124,6 +124,7 @@ TEST_CASE("Checking the reflection fraction in the lp limit", "[extended]") {
   local_model_ext.set_par(XPar::a, spin);
   local_model_ext.set_par(XPar::rin, -1.0);
   local_model_ext.set_par(XPar::rout, 1000.0);
+
   local_model_ext.set_par(XPar::source_r, h);
   local_model_ext.set_par(XPar::source_theta, 0.0);
   //local_model_ext.set_par(XPar::switch_switch_source_geometry, 1);
@@ -271,7 +272,6 @@ TEST_CASE("Compare lp and ext reflected fluxes for x = 0 for several spins and h
       local_model.set_par(XPar::h, height);
       local_model_ext.set_par(XPar::a, spin);
       local_model_ext.set_par(XPar::source_r, height);
-
       REQUIRE_NOTHROW(local_model.eval_model(spec));
       REQUIRE_NOTHROW(local_model_ext.eval_model(spec_ext));
 
