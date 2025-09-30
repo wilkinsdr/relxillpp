@@ -1,6 +1,6 @@
 ## relxill++
 
-Modified and extended version of the relxill model package by Dan Wilkins - wilkins.401@osu.edu
+Modified and extended version of the relxill model package by Dan Wilkins
 
 If using these models, please be sure to cite the original Dauser and Garcia papers detailed through the links below!
 
