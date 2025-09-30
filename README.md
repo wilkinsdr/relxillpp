@@ -1,3 +1,16 @@
+## relxill++ - modified and extended version of the relxill model package
+
+Dan Wilkins - wilkins.401@osu.edu
+If using these models, please be sure to cite the original Dauser and Garcia papers detailed through the links below!
+
+The master branch of this repository is the unmodified relxill package, forked from upstream. For the different model variants, please checkout one of the branches
+
+- relxill_emis - modifications of fitting accretion disc emissivity profiles, including twice broken power law (relxill3), and an emissivity profile in radial bins for free-fitting (relxillemis)
+
+- relxill_components - provides a switch parameter to isolate the reflection and primary components from a relxill model for visualisation purposes.
+
+To compile each of the model variants, copy all of the files from src/ to build/, then run the XSPEC initpackage command on the lmodel_relxill.dat file.
+
 ## relxill - Astrophysics local model for Relativistic Reflection 
 
 Copyright 2022 Thomas Dauser, Remeis Observatory & ECAP
