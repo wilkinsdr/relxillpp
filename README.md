@@ -1,6 +1,7 @@
-## relxill++ - modified and extended version of the relxill model package
+## relxill++
 
-Dan Wilkins - wilkins.401@osu.edu
+Modified and extended version of the relxill model package by Dan Wilkins - wilkins.401@osu.edu
+
 If using these models, please be sure to cite the original Dauser and Garcia papers detailed through the links below!
 
 The master branch of this repository is the unmodified relxill package, forked from upstream. For the different model variants, please checkout one of the branches
