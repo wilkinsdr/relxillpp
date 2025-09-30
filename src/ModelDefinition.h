@@ -33,9 +33,13 @@
 
 enum class XPar {
   linee,
+  // relxill_emis - relxill3 parameters
   index1,
   index2,
+  index3,
   rbr,
+  rbr2,
+  // -- end
   a,
   rin,
   rout,
@@ -75,7 +79,27 @@ enum class XPar {
   mu,   // parameter of jedsad
   ms,   // parameter of jedsad
   b,   // parameter of jedsad
-  p   // parameter of jedsad
+  p,   // parameter of jedsad
+  // relxill_emis - relxillemis parameters for annuli
+  num_emis,
+  index4,
+  index5,
+  index6,
+  index7,
+  index8,
+  index9,
+  index10,
+  index11,
+  index12,
+  index13,
+  index14,
+  index15,
+  index16,
+  index17,
+  index18,
+  index19,
+  index20
+  // -- end
 };
 
 enum class AuxPar{

@@ -138,8 +138,18 @@ class ModelDatabase {
       {ModelName::relline_lp, ModelInfo(T_Model::Line, T_Irrad::LampPost)},
       {ModelName::relline_ext, ModelInfo(T_Model::Line, T_Irrad::LampPost)},
 
+      // relxill_emis - relline model variants
+      {ModelName::relline3, ModelInfo(T_Model::Line, T_Irrad::BknPowerlaw3)},
+      {ModelName::rellineemis, ModelInfo(T_Model::Line, T_Irrad::EmisFit)},
+      // -- end
+
       {ModelName::relconv_lp, ModelInfo(T_Model::Conv, T_Irrad::LampPost)},
       {ModelName::relconv, ModelInfo(T_Model::Conv, T_Irrad::BknPowerlaw)},
+
+      // relxill_emis - relconv model variants
+      {ModelName::relconv3, ModelInfo(T_Model::Conv, T_Irrad::BknPowerlaw3)},
+      {ModelName::relconvemis, ModelInfo(T_Model::Conv, T_Irrad::EmisFit)},
+      // -- end
 
       {ModelName::relxill, ModelInfo(T_Model::Relxill, T_Irrad::BknPowerlaw, T_PrimSpec::CutoffPl)},
       {ModelName::relxillCO, ModelInfo(T_Model::Relxill, T_Irrad::BknPowerlaw, T_PrimSpec::CutoffPl)},
@@ -147,6 +157,14 @@ class ModelDatabase {
       {ModelName::relxillCp, ModelInfo(T_Model::Relxill, T_Irrad::BknPowerlaw, T_PrimSpec::Nthcomp)},
       {ModelName::relxillD, ModelInfo(T_Model::Relxill, T_Irrad::BknPowerlaw, T_PrimSpec::CutoffPl)},
 
+      // relxill_emis - relxill model variants
+      {ModelName::relxill3, ModelInfo(T_Model::Relxill, T_Irrad::BknPowerlaw3, T_PrimSpec::CutoffPl)},
+      {ModelName::relxillCp3, ModelInfo(T_Model::Relxill, T_Irrad::BknPowerlaw3, T_PrimSpec::Nthcomp)},
+
+      {ModelName::relxillemis, ModelInfo(T_Model::Relxill, T_Irrad::EmisFit, T_PrimSpec::CutoffPl)},
+      {ModelName::relxillCpemis, ModelInfo(T_Model::Relxill, T_Irrad::EmisFit, T_PrimSpec::Nthcomp)},
+      // -- end
+      
       {ModelName::relxilllp, ModelInfo(T_Model::Relxill, T_Irrad::LampPost, T_PrimSpec::CutoffPl)},
       {ModelName::relxill_ext_ecut, ModelInfo(T_Model::Relxill, T_Irrad::LampPost, T_PrimSpec::CutoffPl)},
       {ModelName::relxilllpion, ModelInfo(T_Model::Relxill, T_Irrad::LampPost, T_PrimSpec::CutoffPl)},

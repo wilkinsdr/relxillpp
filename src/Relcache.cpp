@@ -58,6 +58,62 @@ static int comp_sys_param(const relParam *cpar, const relParam *par) {
   if (are_values_different(par->emis2, cpar->emis2)) {
     return 1;
   }
+  // relxill_emis - compare emis parameters
+  if (are_values_different(par->emis3, cpar->emis3)) {
+    return 1;
+  }
+  if (are_values_different(par->emis4, cpar->emis4)) {
+    return 1;
+  }
+  if (are_values_different(par->emis5, cpar->emis5)) {
+    return 1;
+  }
+  if (are_values_different(par->emis6, cpar->emis6)) {
+    return 1;
+  }
+  if (are_values_different(par->emis7, cpar->emis7)) {
+    return 1;
+  }
+  if (are_values_different(par->emis8, cpar->emis8)) {
+    return 1;
+  }
+  if (are_values_different(par->emis9, cpar->emis9)) {
+    return 1;
+  }
+  if (are_values_different(par->emis10, cpar->emis10)) {
+    return 1;
+  }
+  if (are_values_different(par->emis11, cpar->emis11)) {
+    return 1;
+  }
+  if (are_values_different(par->emis12, cpar->emis12)) {
+    return 1;
+  }
+  if (are_values_different(par->emis13, cpar->emis13)) {
+    return 1;
+  }
+  if (are_values_different(par->emis14, cpar->emis14)) {
+    return 1;
+  }
+  if (are_values_different(par->emis15, cpar->emis15)) {
+    return 1;
+  }
+  if (are_values_different(par->emis16, cpar->emis16)) {
+    return 1;
+  }
+  if (are_values_different(par->emis17, cpar->emis17)) {
+    return 1;
+  }
+  if (are_values_different(par->emis18, cpar->emis18)) {
+    return 1;
+  }
+  if (are_values_different(par->emis19, cpar->emis19)) {
+    return 1;
+  }
+  if (are_values_different(par->emis20, cpar->emis20)) {
+    return 1;
+  }
+  // -- end
   if (are_values_different(par->gamma, cpar->gamma)) {
     return 1;
   }
@@ -79,6 +135,11 @@ static int comp_sys_param(const relParam *cpar, const relParam *par) {
   if (are_values_different(par->rbr, cpar->rbr)) {
     return 1;
   }
+  // relxill_emis - check rbr2
+  if (are_values_different(par->rbr2, cpar->rbr2)) {
+    return 1;
+  }
+  // -- end
   if (are_values_different(par->rout, cpar->rout)) {
     return 1;
   }
@@ -168,6 +229,27 @@ void set_cached_rel_param(const relParam *par, relParam **ca_rel_param, int *sta
   (*ca_rel_param)->a = par->a;
   (*ca_rel_param)->emis1 = par->emis1;
   (*ca_rel_param)->emis2 = par->emis2;
+  // relxill_emis - set emis parameters
+  (*ca_rel_param)->emis3 = par->emis3;
+  (*ca_rel_param)->emis4 = par->emis4;
+  (*ca_rel_param)->emis5 = par->emis5;
+  (*ca_rel_param)->emis6 = par->emis6;
+  (*ca_rel_param)->emis7 = par->emis7;
+  (*ca_rel_param)->emis8 = par->emis8;
+  (*ca_rel_param)->emis9 = par->emis9;
+  (*ca_rel_param)->emis10 = par->emis10;
+  (*ca_rel_param)->emis11 = par->emis11;
+  (*ca_rel_param)->emis12 = par->emis12;
+  (*ca_rel_param)->emis13 = par->emis13;
+  (*ca_rel_param)->emis14 = par->emis14;
+  (*ca_rel_param)->emis15 = par->emis15;
+  (*ca_rel_param)->emis16 = par->emis16;
+  (*ca_rel_param)->emis17 = par->emis17;
+  (*ca_rel_param)->emis18 = par->emis18;
+  (*ca_rel_param)->emis19 = par->emis19;
+  (*ca_rel_param)->emis20 = par->emis20;
+  // -- end
+  
   (*ca_rel_param)->gamma = par->gamma;
   (*ca_rel_param)->height = par->height;
   (*ca_rel_param)->htop = par->htop;
@@ -185,6 +267,9 @@ void set_cached_rel_param(const relParam *par, relParam **ca_rel_param, int *sta
   (*ca_rel_param)->prim_geometry_type = par->prim_geometry_type;
 
   (*ca_rel_param)->rbr = par->rbr;
+  // relxill_emis - set rbr2
+  (*ca_rel_param)->rbr2 = par->rbr2;
+  // -- end
   (*ca_rel_param)->rin = par->rin;
   (*ca_rel_param)->rout = par->rout;
 

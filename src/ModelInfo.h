@@ -47,7 +47,17 @@ enum class ModelName {
   relxillD,
   relxilllpD,
   relxillBB,
-  relxill_jedsad
+  relxill_jedsad,
+  // relxill_emis - model variants
+  relline3,
+  relconv3,
+  relxill3,
+  relxillCp3,
+  rellineemis,
+  relconvemis,
+  relxillemis,
+  relxillCpemis
+  // -- end
 };
 
 enum class T_Irrad {
@@ -55,6 +65,10 @@ enum class T_Irrad {
   LampPost, // add new?
   BlackBody,
   Const,
+  // relxill_emis - emissivity types
+  BknPowerlaw3,
+  EmisFit,
+  // -- end
   None
 };
 

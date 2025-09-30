@@ -466,6 +466,89 @@ void get_emis_bkn(double *emis, const double *re, int nr,
 
 }
 
+// relxill_emis - emissivity functions for relxill3 and relxillemis
+/**
+ *  @synopsis: calculate the emissivity for twice-broken power law defined
+ *  by up to three indices
+ **/
+void get_emis_bkn3(double *emis, const double *re, int nr,
+                         double index1, double index2, double index3, double rbr, double rbr2) {
+
+  // printf("Executing get_emis_bkn3, index1=%f, index2=%f, index3=%f, rbr=%f, rbr2=%f\n", index1, index2, index3, rbr, rbr2);
+
+  double alpha;
+  double norm;
+
+  int ii;
+  for (ii = 0; ii < nr; ii++) {
+    alpha = index1;
+    norm = 1.;
+    if (re[ii] > rbr) {
+      alpha = index2;
+      norm = pow(rbr, index2-index1);
+    }
+    if (re[ii] > rbr2) {
+      alpha = index3;
+      norm = pow(rbr, index2-index1) * pow(rbr2, index3-index2);
+    }
+    emis[ii] = norm * pow(re[ii], -alpha);
+  }
+
+  // FILE* outfile = fopen("emissivity_pl3.dat", "w");
+  // for (ii = 0; ii < nr; ii++) {
+  //   fprintf(outfile, "%e\t%e\n", re[ii], emis[ii]);
+  // }
+  // fclose(outfile);
+
+  norm_emis_profile(re, nr, emis);
+
+}
+
+/**
+ *  @synopsis: calculate the emissivity for a binned emissivity profile
+ *  defined by up to 20 emissivity values (equally spaced in log(r))
+ **/
+void get_emis_rbin(double *emis, const double *re, int nr, int num_emis, double rin, double rout,
+                  double index1, double index2, double index3, double index4, double index5,
+                  double index6, double index7, double index8, double index9, double index10,
+                  double index11, double index12, double index13, double index14, double index15,
+                  double index16, double index17, double index18, double index19, double index20
+                  ) {
+
+  // printf("Executing get_emis_rbin, r_in=%f, r_out=%f, num_emis=%d\n", rin, rout, num_emis);
+
+  const double log_rin = log(rin);
+  const double log_rout = log(rout);
+  const double dlogr = (log_rout - log_rin) / (num_emis - 1);
+
+  double emis_points[] = {index1, index2, index3, index4, index5,
+                          index6, index7, index8, index9, index10,
+                          index11, index12, index13, index14, index15,
+                          index16, index17, index18, index19, index20};
+
+  int ii;
+  for (ii = 0; ii < nr; ii++) {
+    double logr = log(re[ii]);
+    int ir = static_cast<int>((logr - log_rin) / dlogr);
+    if(ir >= 0 && ir < (num_emis - 1))
+      emis[ii] = exp(emis_points[ir] + (logr - log_rin - ir*dlogr)*(emis_points[ir+1] - emis_points[ir]) / dlogr);
+    else if(ir < 0) 
+      emis[ii] = exp(emis_points[0]);
+    else
+      emis[ii] = exp(emis_points[ir]);
+    //printf("%f    %d    %e\n", re[ii], ir, emis[ii]);
+  }
+
+  norm_emis_profile(re, nr, emis);
+
+  // FILE* outfile = fopen("emissivity_rbin.dat", "w");
+  // for (ii = 0; ii < nr; ii++) {
+  //   fprintf(outfile, "%e\t%e\n", re[ii], emis[ii]);
+  // }
+  // fclose(outfile);
+
+}
+// -- end
 
 /**
  *  @synopsis: calculate the emissivity for an alpha-disk (as given
@@ -571,6 +654,35 @@ emisProfile *calc_emis_profile(double *re, int nr, const relParam *param, int *s
       emis->del_emit[ii] = invalid_angle;
       emis->del_inc[ii] = invalid_angle;
     }
+
+  // relxill_emis - emissivity options for relxill3 and relxillemis variants
+  } else if (param->emis_type == EMIS_TYPE_BKN3) {
+    
+    get_emis_bkn3(emis->emis, emis->re, emis->nr,
+                 param->emis1, param->emis2, param->emis3, param->rbr, param->rbr2);
+    // set the angles in this case to a default value
+    int ii;
+    for (ii = 0; ii < nr; ii++) {
+      emis->del_emit[ii] = invalid_angle;
+      emis->del_inc[ii] = invalid_angle;
+    }
+
+  } else if (param->emis_type == EMIS_TYPE_FIT) {
+    
+    get_emis_rbin(emis->emis, emis->re, emis->nr, param->num_emis, param->rin, param->rout,
+                 param->emis1, param->emis2, param->emis3, param->emis4, param->emis5,
+                 param->emis6, param->emis7, param->emis8, param->emis9, param->emis10,
+                 param->emis11, param->emis12, param->emis13, param->emis14, param->emis15,
+                 param->emis16, param->emis17, param->emis18, param->emis19, param->emis20
+                 );
+    // set the angles in this case to a default value
+    int ii;
+    for (ii = 0; ii < nr; ii++) {
+      emis->del_emit[ii] = invalid_angle;
+      emis->del_inc[ii] = invalid_angle;
+    }
+
+  // -- end
 
   } else if (param->emis_type == EMIS_TYPE_ALPHA) {
     get_emis_alphadisk(emis->emis, re, nr);

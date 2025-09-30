@@ -50,6 +50,10 @@
 #define EMIS_TYPE_LP 2 // define new for extended models?
 #define EMIS_TYPE_ALPHA 3
 #define EMIS_TYPE_CONST 4
+// relxill_emis - emissivity types
+#define EMIS_TYPE_BKN3 5
+#define EMIS_TYPE_FIT 6
+// -- end
 /***************************************/
 
 /** define primary spectrum Type **/
@@ -221,6 +225,28 @@ typedef struct {
   int ion_grad_type;
   int prim_geometry_type;
   rradCorrFactors* rrad_corr_factors;
+  // relxill_emis - relxill3 and relxill_emis parameters
+  double emis3;
+  double rbr2;
+  double num_emis;
+  double emis4;
+  double emis5;
+  double emis6;
+  double emis7;
+  double emis8;
+  double emis9;
+  double emis10;
+  double emis11;
+  double emis12;
+  double emis13;
+  double emis14;
+  double emis15;
+  double emis16;
+  double emis17;
+  double emis18;
+  double emis19;
+  double emis20;
+  // -- end
 } relParam;
 
 typedef struct {

@@ -43,6 +43,18 @@ emisProfile *calc_emis_profile(double *r, int nr, const relParam *param, int *st
 void get_emis_bkn(double *emis, const double *re, int nr,
                   double index1, double index2, double rbr);
 
+// relxill_emis - relxill3 and relxill_emis emissivity functions
+void get_emis_bkn3(double *emis, const double *re, int nr,
+                  double index1, double index2, double index3, double rbr, double rbr2);
+
+void get_emis_rbin(double *emis, const double *re, int nr, int num_emis, double rin, double rout,
+                  double index1, double index2, double index3, double index4, double index5,
+                  double index6, double index7, double index8, double index9, double index10,
+                  double index11, double index12, double index13, double index14, double index15,
+                  double index16, double index17, double index18, double index19, double index20
+                  );
+// -- end
+
 void calc_emis_jet_point_source(emisProfile *emis_profile, const relParam *param, double height, double beta,
                                        lpTable *tab, int *status);
 

@@ -60,6 +60,16 @@ int convertModelType(ModelName name) {
     case ModelName::relxilllpAlpha: return MOD_TYPE_RELXILLLPALPHA;
     case ModelName::relxillBB: return MOD_TYPE_RELXILLBBRET;
     case ModelName::relxill_jedsad: return MOD_TYPE_RELXILL_JEDSAD;
+    // relxill_emis - model types
+    case ModelName::relline3: return MOD_TYPE_RELLINE;
+    case ModelName::relconv3: return MOD_TYPE_RELCONV;
+    case ModelName::relxill3: return MOD_TYPE_RELXILL;
+    case ModelName::relxillCp3: return MOD_TYPE_RELXILL;
+    case ModelName::rellineemis: return MOD_TYPE_RELLINE;
+    case ModelName::relconvemis: return MOD_TYPE_RELCONV;
+    case ModelName::relxillemis: return MOD_TYPE_RELXILL;
+    case ModelName::relxillCpemis: return MOD_TYPE_RELXILL;
+    // -- end
   }
   puts(" *** relxill-error: unknown ModelName, converting model name to integer failed ");
   exit(EXIT_FAILURE);
@@ -73,6 +83,10 @@ int convertModelType(ModelName name) {
 int convertIrradType(T_Irrad name) {
   switch (name) {
     case T_Irrad::BknPowerlaw: return EMIS_TYPE_BKN;
+    // relxill_emis - emissivity types
+    case T_Irrad::BknPowerlaw3: return EMIS_TYPE_BKN3;
+    case T_Irrad::EmisFit: return EMIS_TYPE_FIT;
+    // -- end
     case T_Irrad::LampPost: return EMIS_TYPE_LP;
     case T_Irrad::BlackBody: return EMIS_TYPE_ALPHA;
     case T_Irrad::Const: return EMIS_TYPE_CONST;
@@ -369,6 +383,31 @@ relParam *get_rel_params(const ModelDefinition &inp_param) {
   param->lineE = inp_param.get_otherwise_default(XPar::linee, 0);
   param->gamma = inp_param.get_otherwise_default(XPar::gamma, 0);
   param->htop = inp_param.get_otherwise_default(XPar::htop, 0);
+
+  // relxill_emis - get relxill3 and relxill_emis parameetrs
+  param->emis3 = inp_param.get_otherwise_default(XPar::index3, 0);
+  param->rbr2 = inp_param.get_otherwise_default(XPar::rbr2, 0);
+
+  param->num_emis = inp_param.get_otherwise_default(XPar::num_emis, 0);
+  param->emis3 = inp_param.get_otherwise_default(XPar::index3, 0);
+  param->emis4 = inp_param.get_otherwise_default(XPar::index4, 0);
+  param->emis5 = inp_param.get_otherwise_default(XPar::index5, 0);
+  param->emis6 = inp_param.get_otherwise_default(XPar::index6, 0);
+  param->emis7 = inp_param.get_otherwise_default(XPar::index7, 0);
+  param->emis8 = inp_param.get_otherwise_default(XPar::index8, 0);
+  param->emis9 = inp_param.get_otherwise_default(XPar::index9, 0);
+  param->emis10 = inp_param.get_otherwise_default(XPar::index10, 0);
+  param->emis11 = inp_param.get_otherwise_default(XPar::index11, 0);
+  param->emis12 = inp_param.get_otherwise_default(XPar::index12, 0);
+  param->emis13 = inp_param.get_otherwise_default(XPar::index13, 0);
+  param->emis14 = inp_param.get_otherwise_default(XPar::index14, 0);
+  param->emis15 = inp_param.get_otherwise_default(XPar::index15, 0);
+  param->emis16 = inp_param.get_otherwise_default(XPar::index16, 0);
+  param->emis17 = inp_param.get_otherwise_default(XPar::index17, 0);
+  param->emis18 = inp_param.get_otherwise_default(XPar::index18, 0);
+  param->emis19 = inp_param.get_otherwise_default(XPar::index19, 0);
+  param->emis20 = inp_param.get_otherwise_default(XPar::index20, 0);
+  // -- end
 
   // NOTE: here height acts as a spherical radius and x is the polar angle in degrees
   // We fit r, theta directly from the table, but internally still call them height, x
