@@ -299,6 +299,8 @@ void add_primary_component(double *ener, int n_ener, double *flu, relParam *rel_
   free(xill_table_param);
   CHECK_STATUS_VOID(*status);
 
+  printf("got to add_primary_component\n");
+
   // For the non-relativistic model and if not the LP geometry, we simply multiply by the reflection fraction
   if (is_xill_model(xill_input_param->model_type) || rel_param->emis_type != EMIS_TYPE_LP) {
     for (int ii = 0; ii < n_ener; ii++) {
@@ -339,6 +341,17 @@ void add_primary_component(double *ener, int n_ener, double *flu, relParam *rel_
     // to end up with the correct normalization
     double norm_fac_refl = (fabs(xill_input_param->refl_frac)) / struct_refl_frac->refl_frac;
 
+    // relxill_components - remove either the reflection or the primary component
+    if (rel_param->select_component == 1) { // only reflection
+      printf("reflection only\n");
+      prim_fac = 0;
+    } else if (rel_param->select_component == 2) { // only primary
+      printf("primary only\n");
+      norm_fac_refl = 0;
+    }
+
+    printf("%0.3f %0.3f\n", prim_fac, norm_fac_refl);
+
     for (int ii = 0; ii < n_ener; ii++) {
       pl_flux[ii] *= prim_fac;
       flu[ii] *= norm_fac_refl;
@@ -352,7 +365,7 @@ void add_primary_component(double *ener, int n_ener, double *flu, relParam *rel_
   }
 
   // Finally, add the power law component if refl_frac >= 0
-  if (xill_input_param->refl_frac >= 0) {
+  if (xill_input_param->refl_frac >= 0 && rel_param->select_component != 1) { // relxill_components
     for (int ii = 0; ii < n_ener; ii++) {
       flu[ii] += pl_flux[ii];
     }

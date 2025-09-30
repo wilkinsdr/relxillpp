@@ -135,10 +135,17 @@ void PrimarySource::add_primary_spectrum(const RelxillSpec &relxill_spec) {
     }
   }
 
+  // relxill_components - remove either the reflection or the primary component
   // Finally, add the power law component if refl_frac >= 0
   if (source_parameters.refl_frac() >= 0) {
     for (size_t ii = 0; ii < relxill_spec.num_flux_bins; ii++) {
-      relxill_spec.flux[ii] += primary_spectrum.flux[ii];
+      if (source_parameters.get_select_component() == 0) {  // if 0, behave normally
+        relxill_spec.flux[ii] += primary_spectrum.flux[ii];
+      }
+      else if (source_parameters.get_select_component() == 1) { // if 1, only continuum
+        relxill_spec.flux[ii] = primary_spectrum.flux[ii];
+      }
+      // if 2, only reflection, so do nothing here
     }
   }
 

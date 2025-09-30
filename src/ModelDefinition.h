@@ -75,7 +75,8 @@ enum class XPar {
   mu,   // parameter of jedsad
   ms,   // parameter of jedsad
   b,   // parameter of jedsad
-  p   // parameter of jedsad
+  p,   // parameter of jedsad
+  select_component,  // parameter for relxill_components
 };
 
 enum class AuxPar{

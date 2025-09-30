@@ -202,6 +202,10 @@ class PrimarySourceParameters {
 
   }
 
+  int get_select_component() {  // relxill_components - function to return selected component
+    return m_rel_param->select_component;
+  }
+
  private:
 
   ModelDefinition m_inp_param;

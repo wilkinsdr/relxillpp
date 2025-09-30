@@ -221,6 +221,7 @@ typedef struct {
   int ion_grad_type;
   int prim_geometry_type;
   rradCorrFactors* rrad_corr_factors;
+  int select_component;  // parameter for relxill_components
 } relParam;
 
 typedef struct {

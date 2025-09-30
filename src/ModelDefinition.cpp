@@ -390,6 +390,8 @@ relParam *get_rel_params(const ModelDefinition &inp_param) {
   param->limb = static_cast<int>(lround(inp_param.get_otherwise_default(XPar::limb, 0)));
   param->return_rad = get_returnrad_switch(inp_param);
 
+  param->select_component = inp_param.get_otherwise_default(XPar::select_component, 0);
+
   param->rrad_corr_factors = nullptr;
 
   // this is set by the environment variable "RELLINE_PHYSICAL_NORM"
